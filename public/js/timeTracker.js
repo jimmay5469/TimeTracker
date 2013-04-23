@@ -2,8 +2,17 @@ function TimeTrackerCtrl($scope, $timeout) {
 	$scope.inProg = [];
 	$scope.hist = [];
 	$scope.start = function () {
-		$scope.inProg.push({name: $scope.newItem, startTime: new Date()});
+		$scope.startItem($scope.newItem);
 		$scope.newItem = '';
+	};
+	$scope.startItem = function(item) {
+		if(!$scope.multitask) {
+			var clone = $scope.inProg.slice(0);
+			clone.forEach(function(x) {
+				$scope.stop(x);
+			});
+		}
+		$scope.inProg.push({name: item, startTime: new Date()});
 	};
 	$scope.stop = function(item) {
 		$scope.inProg.splice($scope.inProg.indexOf(item), 1);
@@ -23,5 +32,21 @@ function TimeTrackerCtrl($scope, $timeout) {
 	});
 	$scope.elapsed = function(startTime) {
 		return Math.floor(($scope.now - startTime)/1000);
-	}
+	};
+	$scope.grouping = function() {
+		return $scope.hist.reduce(function(res,obj) {
+			if(!(obj.name in res)) {
+				res.__array.push(res[obj.name] = {name:obj.name,duration:obj.duration});
+			} else {
+				res[obj.name].duration += obj.duration;
+			}
+			return res;
+		}, {__array:[]}).__array;
+	};
+	$scope.total = function() {
+		return $scope.hist.reduce(function(res,obj) {
+			res += obj.duration;
+			return res;
+		}, 0);
+	};
 }
