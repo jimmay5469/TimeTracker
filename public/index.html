@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
 	<head>
 		<title>Time Tracker</title>
 		<meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0;" />
@@ -8,5 +8,27 @@
 		<script src="/js/timeTracker.js"></script>
 	</head>
 	<body>
+		<div ng-controller="TimeTrackerCtrl" class="container">
+			<br />
+			<h2>What are you working on?</h2>
+			<form ng-submit="start()">
+				<div class="input-append">
+					<input type="text" class="span2" ng-model="newItem" />
+					<input type="submit" class="btn" value="Start" />
+				</div>
+			</form>
+			<h2>In Progress ({{inProg.length}})</h2>
+			<ul>
+				<li ng-repeat="item in inProg">
+					{{item.name}} - {{elapsed(item.startTime)}} sec <a href="javascript:void()" class="btn" ng-click="stop(item)">Stop</a>
+				</li>
+			</ul>
+			<h2>History ({{hist.length}})</h2>
+			<ul>
+				<li ng-repeat="item in hist">
+					{{item.name}} - {{item.startTime | date:'short'}} - {{item.duration}} min <a href="javascript:void()" ng-click=""><i class="icon-edit"></i></a><a href="javascript:void()" ng-click="remove(item)"><i class="icon-remove"></i></a>
+				</li>
+			</ul>
+		</div>
 	</body>
 </html>
