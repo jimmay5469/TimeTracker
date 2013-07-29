@@ -3,13 +3,10 @@
 	<head>
 		<title>Time Tracker</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
-		<script src="/js/libs/jquery-1.9.1.js"></script>
-		<script src="/js/libs/handlebars-1.0.0-rc.4.js"></script>
-		<script src="/js/libs/ember-1.0.0-rc.6.1.js"></script>
-		<script src="/js/timeTracker.js"></script>
+		<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />	
 	</head>
 	<body>
+		<script type="text/x-handlebars" data-template-name="todos">
 		<div class="container">
 			<br />
 			<h2>What are you working on?</h2>
@@ -30,10 +27,10 @@
 			<h2>In Progress ({{inProg.length}})</h2>
 			<ul>
 				<li>
-					{{item.name}} - {{elapsed(item.startTime)}} sec <button class="btn">Stop</button>
+					{{item.name}} - elapsed(item.startTime) sec <button class="btn">Stop</button>
 				</li>
 			</ul>
-			<h2>History Totals ({{total()}} min)</h2>
+			<h2>History Totals (total() min)</h2>
 			<ul>
 				<li>
 					{{item.name}} - {{item.duration}} min
@@ -42,9 +39,14 @@
 			<h2>History ({{hist.length}})</h2>
 			<ul>
 				<li>
-					{{item.name}} - {{item.startTime | date:'short'}} - <input type="number" class="span1" min="1" /> min <a href="javascript:void()"><i class="icon-remove"></i></a>
+					{{item.name}} - item.startTime | date:'short' - <input type="number" class="span1" min="1" /> min <a href="javascript:void()"><i class="icon-remove"></i></a>
 				</li>
 			</ul>
 		</div>
+		</script>
+		<script src="/js/libs/jquery-1.9.1.js"></script>
+		<script src="/js/libs/handlebars-1.0.0-rc.4.js"></script>
+		<script src="/js/libs/ember-1.0.0-rc.6.1.js"></script>
+		<script src="/js/timeTracker.js"></script>
 	</body>
 </html>
