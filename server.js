@@ -8,6 +8,6 @@ app.configure(function () {
 	app.use(express.static(path.join(application_root, 'public')));
 });
 
-app.listen(process.env.VMC_APP_PORT || 1337, null);
+app.listen(process.env.VMC_APP_PORT || 3000, null);
 
-console.log('Server running on http://localhost:1337/');
+console.log('Server running on http://localhost:3000/');
