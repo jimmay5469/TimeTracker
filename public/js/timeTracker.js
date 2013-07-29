@@ -1,5 +1,5 @@
-window.Todos = Ember.Application.create();  
+window.TimeTracker = Ember.Application.create();  
 
-Todos.Router.map(function () {
+TimeTracker.Router.map(function () {
 	this.resource('timeTracker', { path: '/' });
 });
